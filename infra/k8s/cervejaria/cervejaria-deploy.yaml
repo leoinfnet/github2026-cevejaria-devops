@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cervejaria-deploy
+  namespace: cervejaria
+  labels:
+    app: cerveja-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cervejaria
+  template:
+    metadata:
+      name: cervejaria-deploy
+      labels:
+        app: cervejaria
+    spec:
+      containers:
+        - name: cervejaria-deploy
+          image: localhost:5001/cervejaria:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: dbconfigmap
+            - secretRef:
+                name: dbsecret
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/readiness
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/liveness
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      

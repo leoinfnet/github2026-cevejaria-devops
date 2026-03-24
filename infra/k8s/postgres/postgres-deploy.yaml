@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+  namespace: cervejaria
+  labels:
+    app: postgres-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      name: postgres-deploy
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres-deploy
+          image: localhost:5001/cervejariadb:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRES_PASSWORD
+              value: '123456'
+      restartPolicy: Always
+      

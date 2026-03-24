@@ -1,0 +1,7 @@
+CREATE ROLE cervejaria WITH
+    LOGIN
+    PASSWORD 'SuperSenha123'
+    CREATEDB
+    CREATEROLE;
+
+GRANT ALL PRIVILEGES ON DATABASE postgres TO cervejaria;

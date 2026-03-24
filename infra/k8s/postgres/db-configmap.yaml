@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbconfigmap
+  namespace: cervejaria
+data:
+  DB_HOST: "postgres-svc"
