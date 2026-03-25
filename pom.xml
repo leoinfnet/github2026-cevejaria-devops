@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.acme</groupId>
 	<artifactId>cervejaria-acme</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<name>cervejaria-acme</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -98,6 +98,16 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.6.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.16.2</version>
 			</plugin>
 		</plugins>
 	</build>
