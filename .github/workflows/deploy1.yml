@@ -40,3 +40,11 @@ jobs:
           echo "NOVA VERSAO $VER"
           docker build . -t cervejaria:${{steps.bump.outputs.version}}
           
+      - name: Docker TAG
+        run: |
+          docker tag cervejaria:${{steps.bump.outputs.version}} localhost:5001/cervejaria:${{steps.bump.outputs.version}}
+          docker tag cervejaria:${{steps.bump.outputs.version}} localhost:5001/cervejaria:latest
+      - name: Docker PUSH
+        run:
+          docker push  localhost:5001/cervejaria:latest
+          docker push  localhost:5001/cervejaria:${{steps.bump.outputs.version}}
