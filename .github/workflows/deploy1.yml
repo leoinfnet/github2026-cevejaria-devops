@@ -30,4 +30,13 @@ jobs:
       - name: Build Project
         run: |
             mvn -B -q -DskipTests package
-
+      - name: Copy Artefato
+        run: | 
+          cp target/*.jar docker/app.jar
+      - name: Build Docker
+        run: |
+          cd docker
+          VER=${{steps.bump.outputs.version}}
+          echo "NOVA VERSAO $VER"
+          docker build . -t cervejaria:${{steps.bump.outputs.version}}
+          
