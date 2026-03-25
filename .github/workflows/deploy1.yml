@@ -54,4 +54,4 @@ jobs:
           kubectl rollout restart deploy cervejaria-deploy -n cervejaria
       - name: Verificar Deploy
         run: |
-          kubectl rollout status deploy cervejaria-deploy -n cervejaria --timout=300s
+          kubectl rollout status deploy cervejaria-deploy -n cervejaria --timeout=300s
