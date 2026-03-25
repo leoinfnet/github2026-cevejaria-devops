@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+//Alterei essa classe
 public class Estilo {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
