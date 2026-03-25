@@ -45,6 +45,6 @@ jobs:
           docker tag cervejaria:${{steps.bump.outputs.version}} localhost:5001/cervejaria:${{steps.bump.outputs.version}}
           docker tag cervejaria:${{steps.bump.outputs.version}} localhost:5001/cervejaria:latest
       - name: Docker PUSH
-        run:
+        run: |
           docker push  localhost:5001/cervejaria:latest
           docker push  localhost:5001/cervejaria:${{steps.bump.outputs.version}}
