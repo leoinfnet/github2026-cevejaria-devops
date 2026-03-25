@@ -27,4 +27,7 @@ jobs:
           VER="$(mvn -q help:evaluate -Dexpression=project.version -DforceStdout)"
           echo "NOVA VERSAO: $VER"
           echo "version=$VER" >> "$GITHUB_OUTPUT"
+      - name: Build Project
+        run: |
+            mvn -B -q -DskipTests package
 
