@@ -48,3 +48,10 @@ jobs:
         run: |
           docker push  localhost:5001/cervejaria:latest
           docker push  localhost:5001/cervejaria:${{steps.bump.outputs.version}}
+      - name: Reiniciar Deployment
+        run: |
+          set -e 
+          kubectl rollout restart deploy cervejaria-deploy -n cervejaria
+      - name: Verificar Deploy
+        run: |
+          kubectl rollout status deploy cervejaria-deploy -n cervejaria --timout=300s
