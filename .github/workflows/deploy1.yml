@@ -7,6 +7,8 @@ on:
 jobs:
   build-deploy:
     runs-on: self-hosted
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -48,6 +50,13 @@ jobs:
         run: |
           docker push  localhost:5001/cervejaria:latest
           docker push  localhost:5001/cervejaria:${{steps.bump.outputs.version}}
+      - name: Commit POM
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'github bot ci: BUMP para a versao ${{steps.bump.outputs.version}}'
+          file_pattern: 'pom.xml'
+
+
       - name: Reiniciar Deployment
         run: |
           set -e 
