@@ -2,7 +2,7 @@ name: deploy1.yml
 on:
   push:
     branches:
-      - main
+      - main2
 
 jobs:
   build-deploy:

@@ -1,0 +1,28 @@
+name: analyze.yml
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'corretto'
+      - name: Install Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: '3.8.2'
+      - name: Build And Analyze
+        env:
+          SONAR_TOKEN: 'sqp_ac899a941233ca82d3576db3d6d1e640e9e5dd0b'
+          SONAR_URL: 'http://localhost:9000'
+          run: mvn -B -q -DskipTests  verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=cervejaria -Dsonar.projectName='cervejaria'
+
